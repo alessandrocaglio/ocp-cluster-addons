@@ -7,12 +7,17 @@ metadata:
   namespace: openshift-gitops
 spec:
   project: default
-  source:
-    repoURL: https://github.com/istio/istio.git
-    targetRevision: master
-    path: samples/bookinfo/platform/kube
-    directory:
-      include: 'bookinfo.yaml'
+  sources:
+    - repoURL: https://github.com/istio/istio.git
+      targetRevision: master
+      path: samples/bookinfo/platform/kube
+      directory:
+        include: 'bookinfo.yaml'
+    - repoURL: https://github.com/istio/istio.git
+      targetRevision: master
+      path: samples/bookinfo/networking
+      directory:
+        include: 'bookinfo-gateway.yaml'
   destination:
     server: https://kubernetes.default.svc
     namespace: bookinfo
