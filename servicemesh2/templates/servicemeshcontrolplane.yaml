@@ -1,0 +1,52 @@
+apiVersion: maistra.io/v2
+kind: ServiceMeshControlPlane
+metadata:
+  name: basic
+  namespace: openshift-operators
+spec:
+  security:
+    dataPlane:
+      mtls: true
+  tracing:
+    type: None
+  proxy:
+    accessLogging:
+      file:
+        # encoding: JSON
+        name: /dev/stdout
+    injection:
+      autoInject: true
+  gateways:
+    egress:
+      enabled: true
+      runtime:
+        deployment:
+          autoScaling: 
+            enabled: true
+            maxReplicas: 2
+            minReplicas: 1
+    ingress:
+      enabled: true
+      runtime:
+        deployment:
+          autoScaling: 
+            enabled: true
+            maxReplicas: 2
+            minReplicas: 1
+  techPreview:
+    tracing:
+      jaeger:
+        install: false
+  policy:
+    type: Istiod
+  addons:
+    grafana:
+      enabled: false
+    kiali:
+      enabled: true
+    prometheus:
+      enabled: true
+  telemetry:
+    type: Istiod
+  version: v2.6
+  mode: ClusterWide
