@@ -9,12 +9,12 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/istio/istio.git
-      targetRevision: master
+      targetRevision: release-1.20
       path: samples/bookinfo/platform/kube
       directory:
         include: 'bookinfo.yaml'
     - repoURL: https://github.com/istio/istio.git
-      targetRevision: master
+      targetRevision: release-1.20
       path: samples/bookinfo/networking
       directory:
         include: 'bookinfo-gateway.yaml'
