@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kiali
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: this
+    targetRevision: kiali-operator
+    path: kiali
+    helm:
+      values: |
+        namespace: openshift-operators
+        operator:
+          startingCSV: kiali-operator.v2.4.3
+          installPlanApproval: Manual
+        helper-status-checker:
+          approver: true
+          checks:
+            - operatorName: kiali-ossm
+              namespace:
+                name: openshift-operators
+              syncwave: '1'
+              serviceAccount:
+                name: "kiali-status-checker"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-operators
