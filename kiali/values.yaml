@@ -19,7 +19,7 @@ helper-status-checker:
   enabled: true
   approver: false
   checks:
-    - operatorName: kiali-ossm
+    - operatorName: kiali-operator
       namespace:
         name: openshift-operators
       syncwave: '1'
