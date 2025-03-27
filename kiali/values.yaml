@@ -7,33 +7,21 @@ namespace: openshift-operators
 # Set to empty to NOT install the Operator
 # operator: ''
 operator:
-  name: devspaces
+  name: kiali-ossm
   channel: stable
   installPlanApproval: Automatic
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   # startingCSV: devspacesoperator.x.y.z
 
-# Set to empty to NOT install CheCluster
-# checluster: ''
-checluster:
-  name: devspaces
-  components: {}
-  containerRegistry: {}
-  devEnvironments:
-    startTimeoutSeconds: 1200
-    secondsOfInactivityBeforeIdling: -1
-  gitServices: {}
-  networking: {}
-
 # Using sub-chart helper-status-checker
 helper-status-checker:
   enabled: true
   approver: false
   checks:
-    - operatorName: devspaces
+    - operatorName: kiali-ossm
       namespace:
         name: openshift-operators
       syncwave: '1'
       serviceAccount:
-        name: "devspaces-status-checker"
+        name: "kiali-status-checker"
