@@ -1,0 +1,27 @@
+# Default values for devspaces.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: openshift-operators
+
+# Set to empty to NOT install the Operator
+# operator: ''
+operator:
+  name: servicemeshoperator
+  channel: stable
+  installPlanApproval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  # startingCSV: servicemeshoperator.x.y.z
+
+# Using sub-chart helper-status-checker
+helper-status-checker:
+  enabled: true
+  approver: false
+  checks:
+    - operatorName: servicemeshoperator
+      namespace:
+        name: openshift-operators
+      syncwave: '1'
+      serviceAccount:
+        name: "servicemesh2-status-checker"
