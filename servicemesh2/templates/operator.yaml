@@ -5,6 +5,7 @@ kind: Subscription
 metadata:
   name: {{ .Values.operator.name }}
   namespace: {{ .Values.namespace }}
+  argocd.argoproj.io/sync-wave: "-10"
 spec:
   channel: {{ .Values.operator.channel }}
   installPlanApproval: {{ .Values.operator.installPlanApproval }}
